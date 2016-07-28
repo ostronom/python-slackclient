@@ -5,9 +5,10 @@ import six
 
 
 class SlackRequest(object):
+    def __init__(self, url):
+        self.url = url
 
-    @staticmethod
-    def do(token, request="?", post_data=None, domain="slack.com"):
+    def do(self, token, request="?", post_data=None):
         '''
         Perform a POST request to the Slack Web API
 
@@ -25,7 +26,7 @@ class SlackRequest(object):
             if not isinstance(v, six.string_types):
                 post_data[k] = json.dumps(v)
 
-        url = 'https://{0}/api/{1}'.format(domain, request)
+        url = '{0}/api/{1}'.format(self.url, request)
         post_data['token'] = token
         files = {'file': post_data.pop('file')} if 'file' in post_data else None
 

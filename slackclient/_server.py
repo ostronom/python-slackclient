@@ -14,7 +14,7 @@ class Server(object):
 
 
     '''
-    def __init__(self, token, connect=True):
+    def __init__(self, token, url, connect=True):
         self.token = token
         self.username = None
         self.domain = None
@@ -25,7 +25,7 @@ class Server(object):
         self.connected = False
         self.pingcounter = 0
         self.ws_url = None
-        self.api_requester = SlackRequest()
+        self.api_requester = SlackRequest(url)
 
         if connect:
             self.rtm_connect()

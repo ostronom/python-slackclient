@@ -22,10 +22,10 @@ class SlackClient(object):
             `here <https://api.slack.com/docs/oauth-test-tokens>`_
             Note: Be `careful with your token <https://api.slack.com/docs/oauth-safety>`_
     '''
-    def __init__(self, token):
+    def __init__(self, token, url = "https://slack.com"):
 
         self.token = token
-        self.server = Server(self.token, False)
+        self.server = Server(self.token, url, False)
 
     def rtm_connect(self):
         '''
