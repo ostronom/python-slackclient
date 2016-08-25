@@ -26,8 +26,7 @@ class SlackRequest(object):
             if not isinstance(v, six.string_types):
                 post_data[k] = json.dumps(v)
 
-        url = '{0}/api/{1}'.format(self.url, request)
-        post_data['token'] = token
+        url = '{0}/{1}/api/{2}'.format(self.url, token, request)
         files = {'file': post_data.pop('file')} if 'file' in post_data else None
 
         return requests.post(url, data=post_data, files=files)

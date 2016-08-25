@@ -23,7 +23,6 @@ class SlackClient(object):
             Note: Be `careful with your token <https://api.slack.com/docs/oauth-safety>`_
     '''
     def __init__(self, token, url = "https://slack.com"):
-
         self.token = token
         self.server = Server(self.token, url, False)
 
