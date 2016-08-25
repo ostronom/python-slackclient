@@ -22,7 +22,8 @@ class SlackClient(object):
             `here <https://api.slack.com/docs/oauth-test-tokens>`_
             Note: Be `careful with your token <https://api.slack.com/docs/oauth-safety>`_
     '''
-    def __init__(self, token, url = "https://slack.com"):
+    def __init__(self, token, url = "https://slack.com", debug = False):
+	self.debug = debug
         self.token = token
         self.server = Server(self.token, url, False)
 
@@ -73,7 +74,10 @@ class SlackClient(object):
 
             See here for more information on responses: https://api.slack.com/web
         '''
-        result = json.loads(self.server.api_call(method, **kwargs))
+        reply = self.server.api_call(method, **kwargs)
+        if self.debug:
+		print 'Reply to %s: %s' % (method, reply.text)
+        result = json.loads(reply)
         if self.server:
             if method == 'im.open':
                 if "ok" in result and result["ok"]:
