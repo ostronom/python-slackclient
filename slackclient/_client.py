@@ -76,7 +76,7 @@ class SlackClient(object):
         '''
         reply = self.server.api_call(method, **kwargs)
         if self.debug:
-		print 'Reply to %s: %s' % (method, reply.text)
+		print 'Reply to %s: %s' % (method, reply)
         result = json.loads(reply)
         if self.server:
             if method == 'im.open':
